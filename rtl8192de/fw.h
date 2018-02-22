@@ -11,10 +11,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -116,28 +112,6 @@
 	SET_BITS_TO_LE_1BYTE( ( __ph2ccmd ) + 1, 0, 8, __val )
 #define SET_H2CCMD_RSVDPAGE_LOC_NULL_DATA( __ph2ccmd, __val )	\
 	SET_BITS_TO_LE_1BYTE( ( __ph2ccmd ) + 2, 0, 8, __val )
-
-struct rtl92d_firmware_header {
-	u16 signature;
-	u8 category;
-	u8 function;
-	u16 version;
-	u8 subversion;
-	u8 rsvd1;
-
-	u8 month;
-	u8 date;
-	u8 hour;
-	u8 minute;
-	u16 ramcodeSize;
-	u16 rsvd2;
-
-	u32 svnindex;
-	u32 rsvd3;
-
-	u32 rsvd4;
-	u32 rsvd5;
-};
 
 int rtl92d_download_fw( struct ieee80211_hw *hw );
 void rtl92d_fill_h2c_cmd( struct ieee80211_hw *hw, u8 element_id,

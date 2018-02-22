@@ -35,7 +35,6 @@
 
 #define REG_SYS_FUNC_EN				0x0002
 #define REG_MCUFWDL				0x0080
-#define FW_8192C_START_ADDRESS			0x1000
 #define FW_8192C_PAGE_SIZE			4096
 #define FW_8723A_POLLING_TIMEOUT_COUNT		1000
 #define FW_8723B_POLLING_TIMEOUT_COUNT		6000
@@ -55,25 +54,6 @@ enum version_8723e {
 	VERSION_TEST_CHIP_1T1R_8723B = 0x0106,
 	VERSION_NORMAL_SMIC_CHIP_1T1R_8723B = 0x010E,
 	VERSION_UNKNOWN = 0xFF,
-};
-
-struct rtl8723e_firmware_header {
-	u16 signature;
-	u8 category;
-	u8 function;
-	u16 version;
-	u8 subversion;
-	u8 rsvd1;
-	u8 month;
-	u8 date;
-	u8 hour;
-	u8 minute;
-	u16 ramcodesize;
-	u16 rsvd2;
-	u32 svnindex;
-	u32 rsvd3;
-	u32 rsvd4;
-	u32 rsvd5;
 };
 
 enum rtl8723be_cmd {
@@ -110,10 +90,6 @@ enum rtl8723be_cmd {
 void rtl8723ae_firmware_selfreset( struct ieee80211_hw *hw );
 void rtl8723be_firmware_selfreset( struct ieee80211_hw *hw );
 void rtl8723_enable_fw_download( struct ieee80211_hw *hw, bool enable );
-void rtl8723_fw_block_write( struct ieee80211_hw *hw,
-			    const u8 *buffer, u32 size );
-void rtl8723_fw_page_write( struct ieee80211_hw *hw,
-			   u32 page, const u8 *buffer, u32 size );
 void rtl8723_write_fw( struct ieee80211_hw *hw,
 		      enum version_8723e version,
 		      u8 *buffer, u32 size, u8 max_page );
@@ -121,6 +97,5 @@ int rtl8723_fw_free_to_go( struct ieee80211_hw *hw, bool is_8723be, int count );
 int rtl8723_download_fw( struct ieee80211_hw *hw, bool is_8723be, int count );
 bool rtl8723_cmd_send_packet( struct ieee80211_hw *hw,
 			     struct sk_buff *skb );
-void rtl8723_fill_dummy( u8 *pfwbuf, u32 *pfwlen );
 
 #endif

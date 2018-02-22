@@ -166,7 +166,7 @@
 #define SET_TX_DESC_NULL_0( __pdesc, __val )		\
 	SET_BITS_TO_LE_4BYTE( __pdesc+8, 14, 1, __val )
 #define SET_TX_DESC_NULL_1( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+8, 15, 1, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 8, 15, 1, __val )
 #define SET_TX_DESC_BK( __pdesc, __val )			\
 	SET_BITS_TO_LE_4BYTE( __pdesc+8, 16, 1, __val )
 #define SET_TX_DESC_MORE_FRAG( __pdesc, __val )		\
@@ -174,7 +174,7 @@
 #define SET_TX_DESC_RAW( __pdesc, __val )			\
 	SET_BITS_TO_LE_4BYTE( __pdesc+8, 18, 1, __val )
 #define SET_TX_DESC_SPE_RPT( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+8, 19, 1, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 8, 19, 1, __val )
 #define SET_TX_DESC_AMPDU_DENSITY( __pdesc, __val )	\
 	SET_BITS_TO_LE_4BYTE( __pdesc+8, 20, 3, __val )
 #define SET_TX_DESC_BT_NULL( __pdesc, __val )		\
@@ -259,15 +259,15 @@
 
 /* Dword 6 */
 #define SET_TX_DESC_SW_DEFINE( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+24, 0, 12, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 24, 0, 12, __val )
 #define SET_TX_DESC_ANTSEL_A( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+24, 16, 3, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 24, 16, 3, __val )
 #define SET_TX_DESC_ANTSEL_B( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+24, 19, 3, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 24, 19, 3, __val )
 #define SET_TX_DESC_ANTSEL_C( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+24, 22, 3, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 24, 22, 3, __val )
 #define SET_TX_DESC_ANTSEL_D( __pdesc, __val )		\
-	SET_BITS_TO_LE_4BYTE( __pdesc+24, 25, 3, __val )
+	SET_BITS_TO_LE_4BYTE( ( __pdesc ) + 24, 25, 3, __val )
 
 /* Dword 7 */
 #define SET_TX_DESC_TX_BUFFER_SIZE( __pdesc, __val )	\
@@ -657,8 +657,8 @@ struct rx_fwinfo {
 	u8 pwdb_all;
 	u8 cfosho[4];
 	u8 cfotail[4];
-	char rxevm[2];
-	char rxsnr[4];
+	s8 rxevm[2];
+	s8 rxsnr[4];
 	u8 pdsnr[2];
 	u8 csi_current[2];
 	u8 csi_target[2];
@@ -864,6 +864,6 @@ void rtl92ee_tx_fill_cmddesc( struct ieee80211_hw *hw, u8 *pdesc,
 			     bool firstseg, bool lastseg,
 			     struct sk_buff *skb );
 u32 rtl92ee_rx_command_packet( struct ieee80211_hw *hw,
-			      struct rtl_stats status,
+			      const struct rtl_stats *status,
 			      struct sk_buff *skb );
 #endif

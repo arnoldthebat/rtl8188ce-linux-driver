@@ -1,16 +1,13 @@
 rtl8188ce-linux-driver
 ======================
 
-
 This modified version of the RealTek WiFi driver fixes some issues with RealTek cards on Linux.
-
 
 **Why use this driver?**
 
 1.  It has been modified to allow you to transmit at up to 33 dBm instead of the stock driver hard limit of 20 dBm, regardless of your CRDA regulatory domain.  This is a substantial increase in capability because every 3 dB increase is equivalent to a doubling of the power.  IOW, you can pump out 4x more Tx power than before.  This is subject to CRDA restrictions however (though you can set that to whatever you want, just make sure you're staying legal)
 2.  It has a few default settings that generally increase stability
 3.  Some helpful fixes are backported from newer kernels so that they can be enjoyed without upgrading the entire kernel (very useful for staying on your distros current kernel while benefitting from fixes relating to this driver)
-
 
 Well supported RealTek cards:
 
@@ -34,6 +31,16 @@ Well supported kernel releases:
         4.2.x
         4.3.x
         4.4.x
+        4.5.x
+        4.6.x
+        4.7.x
+        4.8.x
+        4.9.x
+        4.10.x
+        4.11.x
+        4.12.x
+        4.13.x
+        4.14.x
 
 Well supported Ubuntu (and Ubuntu-based) releases:
 
@@ -44,6 +51,9 @@ Well supported Ubuntu (and Ubuntu-based) releases:
         Ubuntu 14.10
         Ubuntu 15.04
         Ubuntu 15.10
+        Ubuntu 16.04 (LTS)
+        Ubuntu 16.10
+        Ubuntu 17.04
 
         Elementary OS Luna
         Elementary OS Isis
@@ -61,10 +71,19 @@ Well supported Fedora (and Fedora based) releases:
         Fedora 21
         Fedora 22
         Fedora 23
+        Fedora 24
+        Fedora 25
+        Fedora 26
 
-        Red Hat Enterprise Linux 7 (LTS)
+        Red Hat Enterprise Linux 7.0 (LTS)
+        Red Hat Enterprise Linux 7.1 (LTS)
+        Red Hat Enterprise Linux 7.2 (LTS)
+        Red Hat Enterprise Linux 7.3 (LTS)
 
-        CentOS 7 (LTS)
+        CentOS 7.0 (LTS)
+        CentOS 7.1 (LTS)
+        CentOS 7.2 (LTS)
+        CentOS 7.3 (LTS)
 
 Arch is also supported, but tends to break each time the kernel is bumped up a minor version (like 3.13.x to 3.14.x).  I try to fix the breakage quickly but this is not how I support my family ;-)
 
@@ -122,6 +141,9 @@ You can alternatively use DKMS, so that when a new patch-release of the kernel i
 To use DKMS:
 
 1. Follow steps 0-2 in the "Manual Installation" section below.
+
+1. Copy the repo `cp -rv . /usr/src/rtlwifi-1.0.0`
+
 
 2. Run the following command to register the sources with DKMS (the `1.0.0` can be any numbers): (note the period at the end!)
 
@@ -196,6 +218,9 @@ Ex: "git checkout ubuntu-13.04"
     Ubuntu 14.10 | Kernel 3.16.x | ubuntu-14.10
     Ubuntu 15.04 | Kernel 3.19.x | ubuntu-15.04
     Ubuntu 15.10 | Kernel 4.2.x  | ubuntu-15.10
+    Ubuntu 16.04 | Kernel 4.4.x  | ubuntu-16.04
+    Ubuntu 16.10 | Kernel 4.8.x  | ubuntu-16.10
+    Ubuntu 17.04 | Kernel 4.10.x | ubuntu-17.04
     Mint 17      | Kernel 3.13.x | mint-17
     --------------------------------------------
     Any 3.13.x   | Kernel 3.13.x | generic-3.13.x
@@ -210,6 +235,16 @@ Ex: "git checkout ubuntu-13.04"
     Any 4.2.x    | Kernel 4.2.x  | generic-4.2.x
     Any 4.3.x    | Kernel 4.3.x  | generic-4.3.x
     Any 4.4.x    | Kernel 4.4.x  | generic-4.4.x
+    Any 4.5.x    | Kernel 4.5.x  | generic-4.5.x
+    Any 4.6.x    | Kernel 4.6.x  | generic-4.6.x
+    Any 4.7.x    | Kernel 4.7.x  | generic-4.7.x
+    Any 4.8.x    | Kernel 4.8.x  | generic-4.8.x
+    Any 4.9.x    | Kernel 4.9.x  | generic-4.9.x
+    Any 4.10.x   | Kernel 4.10.x | generic-4.10.x
+    Any 4.11.x   | Kernel 4.11.x | generic-4.11.x
+    Any 4.12.x   | Kernel 4.12.x | generic-4.12.x
+    Any 4.13.x   | Kernel 4.13.x | generic-4.13.x
+    Any 4.14.x   | Kernel 4.14.x | generic-4.14.x
 
     * Note, if the Ubuntu/Mint release version and your kernel version conflict,
       go with the branch corresponding to your *kernel version* as

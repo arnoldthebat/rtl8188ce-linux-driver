@@ -11,10 +11,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -254,6 +250,8 @@ struct rtl_pci {
 	/* MSI support */
 	bool msi_support;
 	bool using_msi;
+	/* interrupt clear before set */
+	bool int_clear;
 };
 
 struct mp_adapter {
@@ -280,10 +278,10 @@ struct mp_adapter {
 };
 
 struct rtl_pci_priv {
+	struct bt_coexist_info bt_coexist;
+	struct rtl_led_ctl ledctl;
 	struct rtl_pci dev;
 	struct mp_adapter ndis_adapter;
-	struct rtl_led_ctl ledctl;
-	struct bt_coexist_info bt_coexist;
 };
 
 #define rtl_pcipriv( hw )		( ( ( struct rtl_pci_priv * )( rtl_priv( hw ) )->priv ) )
@@ -291,7 +289,7 @@ struct rtl_pci_priv {
 
 int rtl_pci_reset_trx_ring( struct ieee80211_hw *hw );
 
-extern struct rtl_intf_ops rtl_pci_ops;
+extern const struct rtl_intf_ops rtl_pci_ops;
 
 int rtl_pci_probe( struct pci_dev *pdev,
 			    const struct pci_device_id *id );

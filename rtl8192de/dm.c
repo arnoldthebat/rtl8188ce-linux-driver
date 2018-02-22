@@ -11,10 +11,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
  * The full GNU General Public License is included in this distribution in the
  * file called LICENSE.
  *
@@ -427,7 +423,7 @@ static void rtl92d_dm_dig( struct ieee80211_hw *hw )
 		 "dm_DIG() Before: Recover_cnt=%d, rx_gain_min=%x\n",
 		 de_digtable->recover_cnt, de_digtable->rx_gain_min );
 
-	/* deal with abnorally large false alarm */
+	/* deal with abnormally large false alarm */
 	if ( falsealm_cnt->cnt_all > 10000 ) {
 		RT_TRACE( rtlpriv, COMP_DIG, DBG_LOUD,
 			 "dm_DIG(): Abnormally false alarm case\n" );
